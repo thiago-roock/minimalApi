@@ -1,7 +1,7 @@
 ﻿using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddHealthChecks();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -21,7 +21,7 @@ app.UseSwaggerUI(c =>
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1");
 });
 
-
+app.UseHealthChecks("/check");
 
 app.MapGet("/", (Func<object>)(() =>
 {
